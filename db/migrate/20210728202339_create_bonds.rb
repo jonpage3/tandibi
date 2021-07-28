@@ -1,4 +1,4 @@
-class CreateBonds < ActiveRecord::Migration[6.0]
+class CreateBonds < ActiveRecord::Migration[i5.0]
   def change
     create_table :bonds do |t|
       t.bigint :user_id, null: false
@@ -7,8 +7,8 @@ class CreateBonds < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+    add_index :bonds, [:user_id, :friend_id], unique: true
+    add_foreign_key :bonds, :users, column: :user_id
+    add_foreign_key :bonds, :users, column: :friend_id
   end
-  add_index :bonds, [:user_id, :friend_id], unique: true
-  add_foreign_key :bonds, :users, column: :user_id
-  add_foreign_key :bonds, :users, column: :friend_id
 end
